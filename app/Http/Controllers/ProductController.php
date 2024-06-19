@@ -15,7 +15,8 @@ class ProductController extends Controller
 {
     protected $productService;
 
-    public function __construct(ProductRepository $productService) {
+    public function __construct(ProductRepository $productService)
+    {
         $this->productService = $productService;
     }
 
@@ -26,37 +27,20 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        $validated_data = $request->validated();
-
-        $data = Product::create($validated_data);
-
-        return response()->json(new ProductResource($data), 200);
-        
+        return $this->productService->createProduct($request->validated());
     }
     public function show(int $id)
     {
-        $product = Product::find($id);
-        if(!$product) {
-            return response()->json("Prodct Not Found", 404);
-        }
-
-        return response()->json(new ProductResource($product), 200);
+        return $this->productService->findProduct($id);
     }
 
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $updated_data = $request->validated();
-        $product->update($updated_data);
-        return response()->json($product, 200);
+        return $this->productService->updateProduct($product->id, $request->validated());
     }
 
     public function destroy(int $id)
     {
-        $product = Product::find($id);
-        if(!$product) {
-            return response()->json("Prodct Not Found", 404);
-        }
-        $product->delete();
-        return response()->json('1');
+        return $this->productService->deleteProduct($id);
     }
 }
