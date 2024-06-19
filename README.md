@@ -72,6 +72,16 @@ Others:
 * You are free to use any library or component just as long as it can be installed using Composer.
 * Don't forget to provide instructions on how to set the application up.
 
+<!-- HOW TO RUN THE APP?
+1. clone the repo https://github.com/ChstrJ/chester-jazmin-coding-test.git
+2. RUN composer update
+3. RUN php artisan migrate:fresh
+4. RUN php artisan server
+5. You can now test the endpoints 
+
+
+ -->
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
