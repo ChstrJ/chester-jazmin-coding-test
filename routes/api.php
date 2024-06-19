@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-//I've used api resource to avoid route redundancy (INDEX, STORE, EDIT, UPDATE, DELETE, SHOW)
-Route::apiResource('/products', ProductController::class);
+//I've used api resource to avoid route redundancy (INDEX, STORE, UPDATE, UPDATE, DELETE, SHOW)
+Route::apiResource('/products', ProductController::class)->except(['create', 'edit']);
