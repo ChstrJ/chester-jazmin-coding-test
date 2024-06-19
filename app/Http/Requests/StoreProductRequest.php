@@ -13,7 +13,7 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'price' => ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'],
         ];
+    }
+
+    public function messages()
+    {
+       return [
+            'price.regex' => 'The price field must have two decimal places only'
+       ];
     }
 }
