@@ -18,7 +18,17 @@ class Response
 
     public static function created()
     {
-        return response()->json([HttpStatusMessage::CREATED], HttpStatusCode::CREATED);
+        return response()->json(['status' => HttpStatusMessage::CREATED], HttpStatusCode::CREATED);
+    }
+
+    public static function success()
+    {
+        return response()->json([HttpStatusMessage::OK], HttpStatusCode::OK);
+    }
+
+    public static function invalidData()
+    {
+        return response()->json([HttpStatusMessage::UNPROCESSABLE_ENTITY], HttpStatusCode::UNPROCESSABLE_ENTITY);
     }
 
     public static function notFound()
