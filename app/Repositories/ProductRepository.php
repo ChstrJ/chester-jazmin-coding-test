@@ -3,8 +3,12 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\ProductCollection;
 use App\Interfaces\ProductRepositoryInterface;
 use App\Models\Product;
+use App\Utils\HttpStatusCode;
+use App\Utils\Response;
+use Illuminate\Support\Facades\Cache;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -18,12 +22,27 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function getAllProducts()
     {
+        //cache it and then expires in 6 hours
+        //use simple paginate because it is more light weight than paginate()
+        $products = Cache::remember('products', now()->addHours(6), function() {
+            Product::latest()->simplePaginate();
+        });
 
+        return Response::collection($products);
     }
 
     public function findProduct(int $id)
     {
+        $cacheId = 'product_' . $id;   
+        
+        $product = Cache::remember($cacheId, now()->addMinutes(5), function() use ($id){
+            $this->product->find($id);
+        });
 
+        if(!$product) {
+            return Response::notFound();
+        }
+        return Response::resource($product);
     }
 
     public function createProduct(array $data)

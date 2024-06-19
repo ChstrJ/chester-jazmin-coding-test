@@ -2,6 +2,7 @@
 
 namespace App\Utils;
 
+//for http status message that can be reusable
 class HttpStatusMessage {
     const OK = "Success! Your request was processed.";
     const CREATED = "Congratulations! Your request led to a new resource creation.";

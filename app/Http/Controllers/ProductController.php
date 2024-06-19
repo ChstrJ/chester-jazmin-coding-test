@@ -7,15 +7,21 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Repositories\ProductRepository;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    protected $productService;
+
+    public function __construct(ProductRepository $productService) {
+        $this->productService = $productService;
+    }
+
     public function index(Request $request)
     {
-        $perPage = $request->input('per_page') ?? 15;
-        $data = new ProductCollection(Product::paginate($perPage));
-        return response()->json($data);
+        return $this->productService->getAllProducts();
     }
 
     public function store(StoreProductRequest $request)
@@ -36,12 +42,14 @@ class ProductController extends Controller
 
         return response()->json(new ProductResource($product), 200);
     }
+
     public function update(UpdateProductRequest $request, Product $product)
     {
         $updated_data = $request->validated();
         $product->update($updated_data);
         return response()->json($product, 200);
     }
+
     public function destroy(int $id)
     {
         $product = Product::find($id);
