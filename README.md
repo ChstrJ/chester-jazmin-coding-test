@@ -4,6 +4,26 @@
     <h3 align="center">Backend Developer coding test</h3>
 </div>
 
+<details>
+  <summary>How to set up the application</summary>
+  <ol>
+   <li>clone the repo https://github.com/ChstrJ/chester-jazmin-coding-test.git</li>
+   <li>RUN composer update</li>
+   <li>RUN php artisan migrate:fresh</li>
+   <li>RUN php artisan serve</li>
+  </ol>
+
+<summary>How to test the endpoints</summary>
+ <ul>
+   <li>GET: api/products/</li>
+   <li>POST: api/products/</li>
+   <li>PUT: api/products/{productId}</li>
+   <li>DELETE: api/products/{productId}</li>
+  </ul>
+
+  
+</details>
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
