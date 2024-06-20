@@ -2,16 +2,14 @@
 
 namespace App\Utils;
 
-use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
-use Illuminate\Pagination\Paginator;
 
-//created a global response for the api that uses http status code and http message class
+//created a global response for the api that uses http status code and generic message
 
 class Response
 {
-    public static function resource(array $data)
+    public static function resource(Product $data)
     {
         return response()->json(
             [

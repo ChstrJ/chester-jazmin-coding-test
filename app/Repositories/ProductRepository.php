@@ -43,11 +43,11 @@ class ProductRepository implements ProductRepositoryInterface
         //chech if the product is already cache then get the cache data else remember the cache page
         if (Cache::has($cacheId)) {
             $product = Cache::get($cacheId);
-        } else {
-            $product = Cache::remember($cacheId, now()->addMinutes(5), function () use ($id) {
-                $this->product->find($id);
-            });
         }
+
+        $product = Cache::remember($cacheId, now()->addHours(6), function () use ($id) {
+            return $this->product->find($id);
+        });
 
         if (!$product) {
             return Response::notFound();
@@ -83,19 +83,23 @@ class ProductRepository implements ProductRepositoryInterface
 
         //get the updated product
         $productId = $this->product->find($id);
-        return Response::updated($productId);
 
+        //put the updated product in cache
+        Cache::put($cacheId, $productId, now()->addHours(6));
+        return Response::updated($productId);
     }
 
     public function deleteProduct(int $id)
     {
         $cacheId = 'product_' . $id;
-        $deleteProduct = $this->product->delete->id;
-
-        if (!$deleteProduct) {
+        $product = $this->product->find($id);
+        
+        if (!$product) {
             return Response::notFound();
         }
-
+        //delete the product
+        $product->delete();
+        
         //clear the cache of the deleted product
         Cache::forget($cacheId);
         return Response::deleted();
