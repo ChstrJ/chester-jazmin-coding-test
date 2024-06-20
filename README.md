@@ -31,6 +31,30 @@
   </ol>
 </details>
 
+<!-- HOW TO SET UP APPLICATION -->
+## How to setup the application
+ <ol>
+   <li>clone the repo https://github.com/ChstrJ/chester-jazmin-coding-test.git</li>
+   <li>RUN composer update</li>
+   <li>RUN php artisan migrate:fresh</li>
+   <li>RUN php artisan serve</li>
+</ol>
+
+## Manual Testing Endpoints
+ <ul>
+   <li>GET: api/products/</li>
+   <li>POST: api/products/</li>
+   <li>PUT: api/products/{productId}</li>
+   <li>PATCH: api/products/{productId}</li>
+   <li>DELETE: api/products/{productId}</li>
+</ul>
+
+## Automated Testing Endpoints
+ <ul>
+   <li>RUN php artisan test</li>
+</ul>
+
+
 <!-- ABOUT THE TEST -->
 ## About the test
 
@@ -72,15 +96,6 @@ Others:
 * You are free to use any library or component just as long as it can be installed using Composer.
 * Don't forget to provide instructions on how to set the application up.
 
-<!-- HOW TO RUN THE APP?
-1. clone the repo https://github.com/ChstrJ/chester-jazmin-coding-test.git
-2. RUN composer update
-3. RUN php artisan migrate:fresh
-4. RUN php artisan server
-5. You can now test the endpoints 
-
-
- -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -115,4 +130,4 @@ Others:
 Q: The management requested a new feature where in the fictional e-commerce app must have a "featured products" section.
 How would you go about implementing this feature in the backend?
 
-A: _Put your answer here_
+A: First I would create a column name is_featured which have a boolean type, then create a new endpoint can update the product the is_featured to true, and then create a new endpoint /api/products/featured/ and get all the feauted products and make sure to query the latest featured product based on the timestamp.
