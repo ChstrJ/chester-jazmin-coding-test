@@ -103,6 +103,16 @@ class ProductTest extends TestCase
         $response->assertStatus(200);
     }
 
-   
+    public function testValidationDecimal()
+    {
+        $data = [
+            'name' => 'test test',
+            'description' => 'test',
+            'price' => '69.2121',
+        ];
+
+        $response = $this->postJson("/api/products", $data);
+        $response->assertStatus(422);
+    }
 
 }
