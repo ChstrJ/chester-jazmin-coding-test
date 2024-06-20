@@ -96,6 +96,13 @@ class ProductTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function testFindProduct()
+    {
+        $product = Product::factory()->create();
+        $response = $this->getJson("/api/products/{$product->id}");
+        $response->assertStatus(200);
+    }
+
    
 
 }
