@@ -54,6 +54,58 @@ class ProductTest extends TestCase
             ]);
     }
 
-   
+    public function testUpdateProduct()
+    {
+        $product = Product::factory()->create();
+
+        $updatedData = [
+            'name' => 'update test',
+            'description' => 'update test',
+            'price' => 69.90
+        ];
+
+        $response = $this->putJson("/api/products/{$product->id}", $updatedData);
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'status',
+                'message',
+                'data' => [
+                    'id',
+                    'Product name',
+                    'Product description',
+                    'Product price',
+                    'Created at',
+                    'Updated at'
+                ]
+            ])
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'Product updated successfully.',
+                'data' => [
+                    'Product name' => 'update test',
+                    'Product description' => 'update test',
+                    'Product price' => 69.90
+                ]
+            ]);
+    }
+
+    public function testDeleteProduct()
+    {
+        $product = Product::factory()->create();
+        $response = $this->deleteJson("/api/products/{$product->id}");
+        $response->assertStatus(200);
+    }
+
+    public function testFindProduct()
+    {
+        $product = Product::factory()->create();
+        $response = $this->getJson("/api/products/{$product->id}");
+        $response->assertStatus(200);
+    }
+
+    public function testValidationDecimal()
+    {
+
+    }
 
 }
