@@ -33,7 +33,7 @@ class StoreProductRequest extends FormRequest
     public function messages()
     {
        return [
-            'price.regex' => 'The price field must have two decimal places only'
+            'price.regex' => 'The price field must have maximum of two decimal places only'
        ];
     }
 }
