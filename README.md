@@ -51,6 +51,18 @@
   </ol>
 </details>
 
+<!-- HOW TO SET UP APPLICATION -->
+## How to setup the application
+ <ol>
+   <li>clone the repo https://github.com/ChstrJ/chester-jazmin-coding-test.git</li>
+   <li>RUN composer update</li>
+   <li>RUN php artisan migrate:fresh</li>
+   <li>RUN php artisan serve</li>
+</ol>
+
+
+
+
 <!-- ABOUT THE TEST -->
 ## About the test
 
