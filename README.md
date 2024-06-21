@@ -36,6 +36,8 @@
  <ol>
    <li>RUN git clone https://github.com/ChstrJ/chester-jazmin-coding-test.git</li>
    <li>RUN composer update</li>
+   <li>RUN cp .env.example .env (change your db creds)</li>
+   <li>RUN php artisan key:generate</li>
    <li>RUN php artisan migrate:fresh</li>
    <li>RUN php artisan serve</li>
 </ol>
