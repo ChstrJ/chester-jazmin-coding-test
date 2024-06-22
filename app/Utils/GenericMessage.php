@@ -7,7 +7,7 @@ class GenericMessage {
     const CREATED = "Product created successfully.";
     const DELETED = "Product deleted successfully.";
     const FOUND = "Product found successfully.";
-    const RETRIEVE = "Products retrieve successfully.";
+    const RETRIEVE = "Products retrieved successfully.";
     const NOT_FOUND = "Product not found.";
     const INVALID_DATA = "Invalid data.";
     const SUCCESS = "success";

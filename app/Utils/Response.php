@@ -11,17 +11,9 @@ use Illuminate\Pagination\Paginator;
 
 class Response
 {
-    public static function collection(Paginator $data)
+    public static function collection($data)
     {
-        return response()->json(
-            [
-                'status' => GenericMessage::SUCCESS,
-                'code' => HttpStatusCode::OK,
-                'message' => GenericMessage::RETRIEVE,
-                'data' => new ProductCollection($data)
-            ],
-            HttpStatusCode::OK
-        );
+        return new ProductCollection($data);
     }
     public static function resource(Product $data)
     {

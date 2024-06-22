@@ -30,9 +30,10 @@ class ProductRepository implements ProductRepositoryInterface
             $products = Cache::get($cachePage);
         } else {
             $products = Cache::remember($cachePage, now()->addHours(6), function () {
-                return Product::latest()->simplePaginate(15);
+                return Product::latest()->simplePaginate();
             });
         }
+
         return Response::collection($products);
     }
 
@@ -93,13 +94,13 @@ class ProductRepository implements ProductRepositoryInterface
     {
         $cacheId = 'product_' . $id;
         $product = $this->product->find($id);
-        
+
         if (!$product) {
             return Response::notFound();
         }
         //delete the product
         $product->delete();
-        
+
         //clear the cache of the deleted product
         Cache::forget($cacheId);
         return Response::deleted();
