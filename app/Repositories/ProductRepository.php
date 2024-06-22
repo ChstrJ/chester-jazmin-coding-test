@@ -33,7 +33,7 @@ class ProductRepository implements ProductRepositoryInterface
                 return Product::latest()->simplePaginate(15);
             });
         }
-        return new ProductCollection($products);
+        return Response::collection($products);
     }
 
     public function findProduct(int $id)
